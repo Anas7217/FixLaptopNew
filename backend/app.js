@@ -86,11 +86,12 @@ app.use(bodyParser.json());
   // API route to handle feedback submission
   app.post('/submit-feedback', async (req, res) => {
     try {
-      const currentTimestampIST = moment().tz('Asia/Kolkata'); 
+      const currentTimestampIST = moment().clone().tz('Asia/New_Delhi'); 
+      // const currentTimestampNewDelhi = currentTimestampIST.clone().tz('Asia/New_Delhi');
       const newFeedbackData = {
 
         ...req.body,
-        timestamp: currentTimestampIST // Use IST timestamp
+        timestamp: currentTimestampIST.format() // Use IST timestamp
       };
       const newFeedback = new Feedback(newFeedbackData);
       const savedFeedback = await newFeedback.save();
@@ -190,21 +191,21 @@ app.get('/search', async (req, res) => {
 
 
 
-handlebars.registerHelper('getProduct', function(data) {
-  return data.productName;
-});
-handlebars.registerHelper('getDescription', function(data) {
-  return data.description;
-});
-handlebars.registerHelper('getImage', function(data) {
-  return data.imageLink;
-});
-handlebars.registerHelper('getPrice', function(data) {
-  return data.price;
-});
-handlebars.registerHelper('getRef', function(data) {
-  return data._id;
-});
+// handlebars.registerHelper('getProduct', function(data) {
+//   return data.productName;
+// });
+// handlebars.registerHelper('getDescription', function(data) {
+//   return data.description;
+// });
+// handlebars.registerHelper('getImage', function(data) {
+//   return data.imageLink;
+// });
+// handlebars.registerHelper('getPrice', function(data) {
+//   return data.price;
+// });
+// handlebars.registerHelper('getRef', function(data) {
+//   return data._id;
+// });
   
 
 
